@@ -1,21 +1,19 @@
 # wpsinc/docker-node-cli
 
-FROM node:latest
+FROM node:alpine
+
+RUN apk --no-cache add make gcc g++ python git
+
+# Install dumb-init
+RUN apk --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ add dumb-init
 
 RUN npm install -g bower gulp
 
 # Define working directory.
 WORKDIR /data
 
-# Install dumb-init
-RUN apt-get install wget -y
-RUN wget https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64.deb
-RUN dpkg -i dumb-init_*.deb
-
-# Cleanup
-RUN apt-get clean \
-    && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN chmod -R 755 /usr/local/lib/node_modules/ \
+    && chmod -R 755 /usr/local/bin
 
 # Runs "/usr/bin/dumb-init -- /my/script --with --args"
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
