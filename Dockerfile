@@ -7,13 +7,11 @@ RUN apk --no-cache add make gcc g++ python git
 # Install dumb-init
 RUN apk --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ add dumb-init
 
-RUN npm install -g bower gulp
+RUN npm install -g bower gulp vue-cli \
+    && chmod -R 755 /usr/local/lib/node_modules
 
 # Define working directory.
 WORKDIR /data
-
-RUN chmod -R 755 /usr/local/lib/node_modules/ \
-    && chmod -R 755 /usr/local/bin
 
 # Runs "/usr/bin/dumb-init -- /my/script --with --args"
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
