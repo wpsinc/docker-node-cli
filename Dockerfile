@@ -7,7 +7,7 @@ RUN apk --no-cache add make gcc g++ python git
 # Install dumb-init
 RUN apk --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ add dumb-init
 
-RUN npm install -g bower gulp vue-cli \
+RUN npm install -g bower gulp \
     && chmod -R 755 /usr/local/lib/node_modules
 
 # Define working directory.
