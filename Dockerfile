@@ -1,6 +1,6 @@
 # wpsinc/docker-node-cli
 
-FROM node:alpine
+FROM node:6-alpine
 
 RUN apk --no-cache add make gcc g++ python git
 
