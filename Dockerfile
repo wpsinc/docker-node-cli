@@ -1,11 +1,18 @@
-# wpsinc/docker-node-cli
-
 FROM node:6-alpine
 
-RUN apk --no-cache add make gcc g++ python git
+RUN apk add --no-cache \
+    bash \
+    g++ \
+    gcc \
+    git \
+    libpng \
+    libpng-dev \
+    make \
+    python
 
-# Install dumb-init
-RUN apk --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ add dumb-init
+# Install dumb-init.
+RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ \
+    dumb-init
 
 RUN npm install -g bower gulp \
     && chmod -R 755 /usr/local/lib/node_modules
